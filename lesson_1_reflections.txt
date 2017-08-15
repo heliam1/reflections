@@ -1,0 +1,210 @@
+github
+version control, find differences automatically instead of manually, used by all companies
+
+windows
+	cd downloads fc app.html app1.html
+
+linux/mac
+	 diff -u game_new.js game_old.js
+
+where am i
+	pwd
+	cd --
+	ls
+	$ cd Sublime\ Text\ 3
+	$ dir /c/Program\ Files/Sublime\ Text\ 3
+
+cube@DESKTOP-61DO8MG MINGW64 /
+$ echo 'alias subl="/c/Program\ Files/Sublime\ Text\ 3/sublime_text.exe"' >> ~/.bashrc
+
+directory is folder
+
+cd ~
+	change to your home directory
+
+cd ~                          # change directories to your home directory
+mkdir version-control         # make version-control directory
+cd version-control            # go to version-control directory
+mkdir reflections             # create reflections directory
+cd reflections                # go to reflections directory
+subl lesson_1_reflections.txt # launch sublime with file called lesson_1_reflections.txt (you can replace subl with another editor here if you prefer a different one)
+
+pwd # print working directory - shows what directory you are in
+ls  # list the files in this directory
+
+Use short lines
+Many command line tools, including Git, are less useful if your files contain very long lines. For example, if you use diff to compare two files that have all their content on the same line, diff will only show you that the two files are different. It will not be able to pinpoint the location of the difference for you.
+
+For this reason, it is a good idea to make sure you keep your lines reasonably short when writing your reflections (or other plain-text files). The exact limit is a matter of personal preference. Many developers use a max line length of 80 to 120 characters. Some editors can automatically insert line breaks for you, but for others, like Sublime, you will need to remember to press enter when you want to create a new line.
+
+using diff to find bugs
+How could having easy access to the entire history of a file make you a more efficient programmer in the long term?
+	using history for efficiency
+
+commit is a "save" of every file in your repository
+	e.g. game.js index.html index.css
+can look at commmit history
+	id, authord, date, msg
+
+	git diff command
+		- is they were in the first file but arent here
+		+ is theyre in 2nd file but not first
+
+$ git diff id919191991 id958583085034
+	!!
+
+keep commits small, remember the small messages!!
+	As the diff between two versions gets bigger, it gets harder to understand and less useful. However, you don’t want to make your commits too small either. If you always save a commit every time you change a line of code, your history will be harder to read since it will have
+	huge number of commits over a short time period.
+	A good rule of thumb is to make one commit per logical change.
+	fixing 2 small bugs needs 2 commits, 1 commit for a feature youve worked an hour on,
+	fixing 3 typos in a README is 1 commit, 2 features 1 commit is too big
+	manual VC lets you decide when their should be new saves/logical
+
+always read the README u dumbfuck liam
+
+tracking across files
+	css and html, changing a procedure with 2 paramters to a function with 2 returns?
+	
+	git log --stat
+		shows how many files got changed, and how big the changes were
+
+git -- version # check if you already have git installeD!
+
+downloading an entire repository is different to just downloading a file
+	.. cloning 
+	$ git clone URL
+
+	cube@DESKTOP-61DO8MG MINGW64 /
+	$ git clone  https://github.com/udacity/asteroids.git
+	Cloning into 'asteroids'...
+	remote: Counting objects: 209, done.
+	remote: Total 209 (delta 0), reused 0 (delta 0), pack-reused 209
+	Receiving objects: 100% (209/209), 191.54 KiB | 28.00 KiB/s, done.
+	Resolving deltas: 100% (127/127), done.
+
+	cube@DESKTOP-61DO8MG MINGW64 /
+	$ pwd
+	/
+
+	cube@DESKTOP-61DO8MG MINGW64 /
+	$ cd asteroids
+
+	cube@DESKTOP-61DO8MG MINGW64 /asteroids (master)
+	$
+
+	git log
+		q to quit
+
+	git config --global color.ui auto
+
+	git diff id1 id2
+		If it is easier, you may enter the first four or more characters of the commit ID rather than pasting the entire ID.
+
+Git Errors and Warnings Solution
+	Should not be doing an octopus
+		Octopus is a strategy Git uses to combine many different versions of code together. This message can appear if you try to use this strategy in an inappropriate situation.
+
+	You are in 'detached HEAD' state
+		HEAD is what Git calls the commit you are currently on. You can “detach” the HEAD by switching to a previous commit, which we’ll see in the next video. Despite what it sounds like, it’s actually not a bad thing to detach the HEAD. Git just warns you so that you’ll realize you’re doing it.
+
+git checkout =/= SVN checkout
+	like restoring a previous version/commit
+	for checking which commit introduced a bug
+
+we fucking cloned it into the git folder... wtf lol
+	HMMM does it clone into our current directory?
+	c/Program Files/Git/asteroids!!
+		kms
+
+git checkout id1111
+
+version control makes your more confident to make changes that might break your code
+	no fear of breaking things, can make a large logical change vs small baby interative steps
+	mv
+
+Rracking versions using Git
+	You would be able to see the difference between the two versions, but you would no longer be able to directly access the old version.
+		This is false. You could still access the old version of the file by checking out the commit associated with that version. Then the recipe would temporarily revert to its state at the time that commit was made. 
+
+	Using git diff to compare the two versions would show the same changes as diff -u did in the previous exercise.
+		This is true. diff -u and git diff show very similar outputs. Even if the exact format was slightly different, the actual changes indicated would be the same. 
+
+
+	The name of the file would change when you saved a second version in Git.
+		This is false. The name of the file would remain the same. Git does not rename files when you save a new commit. Instead, Git uses the commit IDs to refer to different versions of the files, and you can use git checkout to access old versions of your files. 
+
+	To save two versions of the file, you would create two commits.
+		This is true. Commits are Git's way of saving versions, so to save two different versions, you would create two commits.
+
+Git command review
+	Compare two commits, printing each line that is present in one commit but not the other.
+		git diff will do this. It takes two arguments - the two commit ids to compare. 
+
+	Make a copy of an entire Git repository, including the history, onto your own computer.
+		git clone will do this. It takes one argument - the url of the repository to copy. 
+
+	Temporarily reset all files in a directory to their state at the time of a specific commit.
+		git checkout will do this. It takes one argument - the commit ID to restore. 
+
+	Show the commits made in this repository, starting with the most recent.
+		git log will do this. It doesn't take any arguments.
+
+Behavior of git clone
+	If someone else gives you the location of their directory or repository, you can copy or clone it to your own computer.
+		This is true for both copying a directory and cloning a repository.
+		As you saw in the previous lesson, if you have a URL to a repository, you can copy it to your computer using git clone.
+		For copying a directory, you weren't expected to know this, but it is possible to copy a directory from one computer to another using the command scp, which stands for "secure copy". The name was chosen because the scp command lets you securely copy a directory from one computer to another. 
+
+	The history of changes to the directory or repository is copied.
+		This is true for cloning a repository, but not for copying a directory. The main reason to use git clone rather than copying the directory is because git clone will also copy the commit history of the repository. However, copying can be done on any directory, whereas git clone only works on a Git repository. 
+
+	If you make changes to the copied directory or cloned repository, the original will not change.
+		This is true for both copying a directory and cloning a repository. In both cases, you're making a copy that you can alter without changing the original. 
+
+	The state of every file in the directory or repository is copied.
+		This is true for both copying a directory and cloning a repository. In both cases, all the files are copied
+
+Suppose you ran git log in a repository. Part of the output is given below. If you were to run git checkout and examine each of these three commits in turn, which ones would you expect to contain code for a mute button?
+	git log output:
+	commit 7be5a12f1567866b0d77ccdf2055d1a33831da78
+	Author: Ellison Leão <el@gmail.com>
+	Date:   Fri Jul 11 12:56:26 2014 -0300
+
+    	Add sound for the wing.
+
+	commit 06d72e1f95f046002ec46f41cf71957227111141
+	Author: Ellison Leão <el@gmail.com>
+	Date:   Wed Jul 9 23:42:55 2014 -0300
+
+    	Add mute button.
+
+	commit 3d4d45b246aad6a1cd0afaf7cfae26966110727e
+	Author: Ellison Leão <el@gmail.com>
+	Date:   Mon Jul 7 17:35:47 2014 -0300
+
+    	Fix leaderboard button
+
+Behavior of git checkout
+	Checking out an earlier commit will change the state of at least one file.
+		This is sometimes true. Git doesn't allow you to save a new commit if no files have been updated, so you might think this is always true. However, it's possible to do the following:
+		Save a commit (call this commit 1).
+		Update some files and save another commit (call this commit 2).
+		Change all the files back to their state during commit 1, then save again (call this commit 3).
+		This sometimes happens if commit 2 contained a bug, and it's important to fix the bug quickly. The easiest thing to do might be to remove all the changes introduced by commit 2 to fix the bug, then figure out how to safely reintroduce the changes later.
+		At this point, commit 3 is the latest commit, so if you checkout commit 1, none of the files will be changed. 
+
+
+	Checking out an earlier commit will change the state of more than one file.
+	Checking out an earlier commit will change the state of every file in the repository.
+		Both of these are sometimes true. Since each commit tracks the state of all files in the repository, it is possible that checking out an earlier commit will change the state of multiple files, or even all the files in the repository. However, it is possible to save a new commit after changing only one file, so it is possible only one file will change. 
+
+
+	After checking out a commit, the state of all the files in the repository will be from the same point in time.
+		This is always true. A commit saves a snapshot of all files in the repository at the time the commit was made, so checking out an earlier commit will result in all the files being reverted to their state at the time the commit was made. That is, the files will be in a consistent state.
+
+use d to show further commits
+
+using checkout will literally change the index.html to the id/commit you choose
+do remember to change it back
+do remember that trying n-1 to fnd the bug at commit n
