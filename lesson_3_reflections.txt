@@ -1,0 +1,11 @@
+push or pull
+
+git remote
+	see all remotes
+
+git remote add origin https://github.com:heliam1/reflections.git
+
+git remote -v
+
+git push origin master
+	send to the remote
