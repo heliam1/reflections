@@ -1,0 +1,177 @@
+cd /c/Users/cube/Desktop/version-control/
+
+repositories are a little different to normal folders/directories
+	cos they have lots of .files which dont show up in most file explorers by default, cos it's
+	data that the user doesnt need to interact with
+		i guess functions not procedures =P
+		these files are meta data by git
+	ls -a 
+		to see all
+
+create/init a repository, has 0 commits, a commit is a snapshot of a Git repository
+	use git log to see how many commits
+	ls -a for hidden files h3h3
+
+git status
+	shows which files have changed since last 
+
+run commnands git init and git status in the directory with your reflections
+	cube@DESKTOP-61DO8MG MINGW64 ~/Desktop/version-control/reflections
+	$ git init
+	Initialized empty Git repository in C:/Users/cube/Desktop/version-control/reflections/.git/
+
+	cube@DESKTOP-61DO8MG MINGW64 ~/Desktop/version-control/reflections (master)
+	$ git status
+	On branch master
+
+	No commits yet
+
+	Untracked files:
+  	  (use "git add <file>..." to include in what will be committed)
+
+    	    lesson_1_reflections.txt
+      		lesson_2_reflections.txt
+
+	nothing added to commit but untracked files present (use "git add" to track)
+
+git reset lesson_2_reflections.txt 
+	and the file will be removed from the staging area, but it will still be in your working directory.
+
+REMEMBER 
+working		staging		repository
+directory	area
+	only gonna do v the first lesson, cos 1 logical thing per commit 
+git add file             git status
+
+git checkout master
+
+working directory 		staging			repository
+git diff (working directory to staging area)
+git add fielgit
+git diff --staged (staging area to most recent commit)
+git commit -m "message"
+git diff commitid1 commitid2
+
+
+git reset --hard
+	resets all changes in working directory and staging area
+
+when running git diff id1 id2
+	we want the "good one" first
+	like so id1 was earlier commit, but didnt have bug
+	let's compare what we did to commit 2..
+
+How can you use the staging area to make sure you have one commit per logical change?
+	testing the staging area against working directory git diff 
+	testing staging area to most recent commit git diff --staged
+	just creates a barrier/layer
+
+git branch
+	List all the branches in your repo, and also tell you what branch you're currently in:
+
+git branch newBranch
+	creates newBranch
+
+git checkout -b newBranch
+	Create a new branch and switch to it:
+
+git checkout branchNew
+	Switch from one branch to another:
+
+git branch -d branchname
+	Delete the feature branch:
+
+now you can commit this branch,
+	but you havent merged it to master yet so
+
+What are some situations when branches would be helpful in keeping your history organized? How would branches help?
+	working 2 separate features
+	master branch is productive branch never brakes
+	development branch
+	experiment branch
+
+git log --graph --oneline master coins
+
+REACHABILITY
+	unreachable commits
+								master, head
+
+How do the diagrams help you visualize the branch structure?
+	don't lose branches (they can only see their parents, some are unreachable)
+	... does that mean we record their id?
+
+when merging
+	lines in both should be in both
+	but what about lines +d or -d in branches?
+	so we look at the original
+	original abd, jakes bde, rachels abcd
+		so remove a since jake removed, keep bd, add e from jake, c form rachel
+		bcde
+	merge coins into master branch..
+	keeps info about both, if merging with master commit is now tip of the master branch
+	when merging looks at 2 commits 2 merge, and at their shared parent dwon the line
+
+	If a branch is deleted and leaves some commits unreachable from existing branches, those commits will continue to be accessible by commit id, until Git’s garbage collection runs. This will happen automatically from time to time, unless you actively turn it off. You can also run this process manually with git gc.
+
+	merging coins (you?) should delete the label of that branch,
+	all commits are still reachable tho, still have id
+	git log will show these by time created
+
+git branch
+	to see youre on the master branch
+
+git merge master coins
+	comes with default commit message, just leave it as is usally
+
+git log
+
+git show?
+git show (commitID)
+	shows diff between a commit and its parent
+	git diff on commits from different branches is messy
+
+git branch -d coins
+	deletes the label, not the commits in the branch
+	could make the commits hard to find, but theyre accessible through master brnach git log
+
+git merge 
+	will also include the currently checked-out branch in the merged version. So if you have branch1 checked out, and you run git merge branch2 branch3, the merged version will combine branch1 as well as branch2 and branch3. That’s because the branch1 label will update after you make the merge commit, so it’s unlikely that you didn’t want the changes from branch1 included in the merge. For this reason, you should always checkout one of the two branches you’re planning on merging before doing the merge. Which one you should check out depends on which branch label you want to point to the new commit.
+	Since the checked-out branch is always included in the merge, you may have guessed that when you are merging two branches, you don't need to specify both of them as arguments to git merge on the command line. If you want to merge branch2 into branch1, you can simply git checkout branch1 and then type git merge branch2. The only reason to type git merge branch1 branch2 is if it helps you keep better mental track of which branches you are merging.
+	Also, since the two branches are merged, the order in which they are typed into the command line does not matter. The key is to remember that git merge always merges all the specified branches into the currently checked out branch, creating a new commit for that branch.
+		IF ERROR
+			git merge --abort
+			git log
+
+git config --global core.autocrlf true
+
+merge conflicts
+	original abd 
+	jake ab'd 		rachel ab''d
+
+	a yes
+	b unknown
+	b' b'' both unknown
+	d yes
+
+	to resolve conflicts
+		git checkout easy-mode
+		git merge easy-mode master
+			go into game.js
+			git will show u some things in the codeeeee
+			<<<<<<<<<<<<Head (checked out atm)
+			>>>>>>>>master
+
+			remember to delete these special lines^
+
+		COMMITTING THE CONFLICT RESOLUTION
+			git status
+
+			git add game.js
+			git status
+
+			git commit
+
+		git log -n 1
+
+
+
